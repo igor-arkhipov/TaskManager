@@ -5,21 +5,22 @@ class Task < ApplicationRecord
   validates :name, :description, :author, presence: true
   validates :description, length: { maximum: 500 }
 
-  # [TODO] Look later why test/models/task_test.rb fails
+
   state_machine initial: :new_task do
-    event :to_dev do
+    
+    event :goes_to_dev do
       transition new_task: :in_development
     end
 
-    event :back_to_dev do
+    event :return_to_dev do
       transition from: [:in_qa, :in_code_review], to: :in_development
     end
 
-    event :to_qa do
+    event :qa_check do
       transition new_task: :in_qa
     end
 
-    event :to_code_reveiw do
+    event :code_review do
       transition in_qa: :in_code_review
     end
 
