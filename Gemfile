@@ -57,3 +57,5 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rubocop'
 end
+
+gem 'slim-rails'
