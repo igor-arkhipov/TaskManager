@@ -59,3 +59,8 @@ group :development, :test do
 end
 
 gem 'slim-rails'
+
+gem 'kaminari'
+gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'responders'
+gem 'active_model_serializers'
