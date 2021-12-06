@@ -6,7 +6,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     sign_in admin
   end
 
-  test "should get show" do
+  test 'should get show' do
     user = create(:user)
     get :show, params: { id: user.id }
     assert_response :success
