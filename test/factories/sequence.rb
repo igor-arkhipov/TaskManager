@@ -3,9 +3,9 @@ FactoryBot.define do
     "string#{n}"
   end
 
-  sequence :first_name, %i[Ivan Piotr Sergey Sanya Kirill].cycle
+  sequence :first_name, [:Ivan, :Piotr, :Sergey, :Sanya, :Kirill].cycle
 
-  sequence :last_name, %i[Ivanov Piotrov Sergeev Kuznetcov].cycle
+  sequence :last_name, [:Ivanov, :Piotrov, :Sergeev, :Kuznetcov].cycle
 
   sequence :email do |n|
     "stranger#{n}@example.xyz"
