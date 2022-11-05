@@ -37,3 +37,6 @@ yarn-debug.log*
 
 .vscode/*
 .idea/*
+
+/app/javascript/routes.js
+/app/javascript/routes.d.ts
