@@ -67,3 +67,5 @@ gem 'active_model_serializers'
 
 # higher vesions does't work with Rails 6.1.4.1
 gem 'js-routes', '~> 2.0.8'
+
+gem 'webpacker-react'
