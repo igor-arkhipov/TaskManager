@@ -1,8 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    width: 250,
+  addButton: {
+    position: 'fixed',
+    bottom: 32,
+    right: 32,
   },
 }));
 
