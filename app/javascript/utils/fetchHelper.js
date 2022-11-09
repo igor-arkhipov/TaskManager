@@ -17,6 +17,14 @@ function headers() {
   };
 }
 
+axios.create({
+  paramsSerializer: {
+    encode: qs.parse,
+    serialize: qs.stringify,
+  },
+});
+
+axios.defaults.headers.get = headers();
 axios.defaults.headers.post = headers();
 axios.defaults.headers.put = headers();
 axios.defaults.headers.delete = headers();
@@ -37,24 +45,19 @@ axios.interceptors.response.use(null, (error) => {
 
 export default {
   get(url, params = {}) {
-    return axios
-      .get(url, {
-        params: decamelize(params),
-        paramsSerializer: (parameters) => qs.stringify(parameters, { encode: false }),
-      })
-      .then(camelize);
+    return axios.get(url, { params: decamelize(params) }).then(camelize);
   },
 
   post(url, json) {
-    const body = decamelize(json);
+    const task = decamelize(json);
 
-    return axios.post(url, body).then(camelize);
+    return axios.post(url, { task }).then(camelize);
   },
 
   put(url, json) {
-    const body = decamelize(json);
+    const task = decamelize(json);
 
-    return axios.put(url, body).then(camelize);
+    return axios.put(url, { task }).then(camelize);
   },
 
   delete(url) {
