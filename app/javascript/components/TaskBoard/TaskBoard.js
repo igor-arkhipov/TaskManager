@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@asseinfo/react-kanban';
 import { propOr } from 'ramda';
 
-// import useStyles from './useStyles';
+import useStyles from './useStyles';
 import '@asseinfo/react-kanban/dist/styles.css';
 
 import Task from 'components/Task';
@@ -29,7 +29,7 @@ const initialBoard = {
 };
 
 function TaskBoard() {
-  // const styles = useStyles();
+  const styles = useStyles();
   const [board, setBoard] = useState(initialBoard);
   const [boardCards, setBoardCards] = useState([]);
 
@@ -78,18 +78,38 @@ function TaskBoard() {
     });
   };
 
+  const handleCardDragEnd = (task, source, destination) => {
+    const transition = task.transitions.find(({ to }) => destination.toColumnId === to);
+    if (!transition) {
+      console.log(`Stay in current status`);
+      return null;
+    }
+
+    return TasksRepository.update(task.id, { stateEvent: transition.event })
+      .then(() => {
+        loadColumnInitial(destination.toColumnId);
+        loadColumnInitial(source.fromColumnId);
+        console.log(`Move done!`);
+      })
+      .catch((error) => {
+        console.error(`Move failed! ${error.message}`);
+      });
+  };
+
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
 
   return (
-    <KanbanBoard
-      renderColumnHeader={(column) => {
-        <ColumnHeader column={column} onLoadMore={loadColumnMore} />;
-      }}
-      renderCard={(card) => <Task task={card} />}
-    >
-      {board}
-    </KanbanBoard>
+    <div>
+      <KanbanBoard
+        disableColumnDrag
+        renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
+        renderCard={(card) => <Task task={card} />}
+        onCardDragEnd={handleCardDragEnd}
+      >
+        {board}
+      </KanbanBoard>
+    </div>
   );
 }
 

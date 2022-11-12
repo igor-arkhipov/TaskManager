@@ -44,23 +44,26 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 export default {
-  get(url, params = {}) {
-    return axios.get(url, { params: decamelize(params) }).then(camelize);
+  async get(url, params = {}) {
+    const obj = await axios.get(url, { params: decamelize(params) });
+    return camelize(obj);
   },
 
-  post(url, json) {
+  async post(url, json) {
     const task = decamelize(json);
 
-    return axios.post(url, { task }).then(camelize);
+    const obj = await axios.post(url, { task });
+    return camelize(obj);
   },
 
-  put(url, json) {
+  async put(url, json) {
     const task = decamelize(json);
 
-    return axios.put(url, { task }).then(camelize);
+    return axios.put(url, task).then(camelize);
   },
 
-  delete(url) {
-    return axios.delete(url).then(camelize);
+  async delete(url) {
+    const obj = await axios.delete(url);
+    return camelize(obj);
   },
 };
