@@ -52,8 +52,7 @@ export default {
   async post(url, json) {
     const task = decamelize(json);
 
-    const obj = await axios.post(url, { task });
-    return camelize(obj);
+    return axios.post(url, task).then(camelize);
   },
 
   async put(url, json) {
