@@ -127,7 +127,7 @@ function TaskBoard() {
 
   return (
     <div>
-      <Fab className={styles.FloatingAddButton} color="primary" aria-label="add" onClick={handleAddPopupOpen}>
+      <Fab className={styles.addButton} color="primary" size="small" aria-label="add" onClick={handleAddPopupOpen}>
         <AddIcon />
       </Fab>
       <KanbanBoard
