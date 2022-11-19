@@ -16,6 +16,8 @@ import TaskForm from 'forms/TaskForm';
 
 import useStyles from './useStyles';
 
+/* eslint-disable no-console */
+
 function AddPopup({ onClose, onCardCreate }) {
   const [task, changeTask] = useState(TaskForm.defaultAttributes());
   const [isSaving, setSaving] = useState(false);

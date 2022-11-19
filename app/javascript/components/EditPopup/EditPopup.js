@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { isNil } from 'ramda';
 
-import Form from './components/Form';
+import Form from './Form';
 
 import useStyles from './useStyles';
+
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Modal from '@mui/material/Modal';
-import CircularProgress from '@mui/material/CircularProgress';
+import Modal from '@material-ui/core/Modal';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
-
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 
 function EditPopup({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate }) {
   const [task, setTask] = useState(null);
@@ -97,17 +97,11 @@ function EditPopup({ cardId, onClose, onCardDestroy, onCardLoad, onCardUpdate })
 }
 
 EditPopup.propTypes = {
-  cardId: PropTypes.shape().isRequired,
-  errors: PropTypes.shape({
-    name: PropTypes.arrayOf(PropTypes.string),
-    description: PropTypes.arrayOf(PropTypes.string),
-    author: PropTypes.arrayOf(PropTypes.string),
-    assignee: PropTypes.arrayOf(PropTypes.string),
-  }),
-};
-
-EditPopup.defaultProps = {
-  errors: {},
+  cardId: PropTypes.number.isRequired,
+  onCardDestroy: PropTypes.func.isRequired,
+  onCardLoad: PropTypes.func.isRequired,
+  onCardUpdate: PropTypes.func.isRequired,
+  onClose: PropTypes.isRequired,
 };
 
 export default EditPopup;
