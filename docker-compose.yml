@@ -21,11 +21,10 @@ services:
       GEM_PATH: /bundle_cache
       RAILS_PORT: 3000
       RUBYOPT: -W:no-deprecated -W:no-experimental
-    command: bundle exec rails s -b '0.0.0.0' -p 3000  
-    environment:
       DATABASE_HOST: db
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
+    command: bundle exec rails s -b '0.0.0.0' -p 3000
 
   db:
     image: postgres:11.4
