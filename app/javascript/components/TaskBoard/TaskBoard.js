@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import KanbanBoard from '@asseinfo/react-kanban';
 import { propOr } from 'ramda';
 
-import useStyles from './useStyles';
 import '@asseinfo/react-kanban/dist/styles.css';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -13,6 +12,8 @@ import ColumnHeader from 'components/ColumnHeader';
 import TaskForm from 'forms/TaskForm';
 import AddPopup from 'components/AddPopup';
 import EditPopup from 'components/EditPopup';
+
+import useStyles from './useStyles';
 
 const STATES = [
   { key: 'new_task', value: 'New' },
@@ -65,7 +66,8 @@ function TaskBoard() {
   const handleCardDragEnd = (task, source, destination) => {
     const transition = task.transitions.find(({ to }) => destination.toColumnId === to);
     if (!transition) {
-      console.log(`Stay in current status`);
+      // eslint-disable-next-line no-alert
+      alert(`Stay in current status`);
       return null;
     }
 
@@ -73,10 +75,12 @@ function TaskBoard() {
       .then(() => {
         loadColumnInitial(destination.toColumnId);
         loadColumnInitial(source.fromColumnId);
-        console.log(`Move done!`);
+        // eslint-disable-next-line no-alert
+        alert(`Move done!`);
       })
       .catch((error) => {
-        console.error(`Move failed! ${error.message}`);
+        // eslint-disable-next-line no-alert
+        alert(`Move failed! ${error.message}`);
       });
   };
 
